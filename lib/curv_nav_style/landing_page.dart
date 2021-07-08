@@ -41,7 +41,9 @@ class _LandingPageState extends State<LandingPage> {
             selectedIndex = index;
           });
         },
-        animationCurve: Curves.easeInBack,
+
+        animationCurve: Curves
+            .easeInBack, //! this animationCurve is the atyle of navigation bar
       ),
       body: screen[selectedIndex],
     );
