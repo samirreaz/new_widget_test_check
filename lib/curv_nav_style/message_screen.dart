@@ -14,6 +14,9 @@ class _MessageScreenState extends State<MessageScreen> {
       appBar: AppBar(
         title: Text('Message Screen'),
       ),
+      body: Container(
+        color: Colors.purpleAccent,
+      ),
     );
   }
 }

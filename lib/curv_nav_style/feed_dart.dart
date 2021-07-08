@@ -14,6 +14,9 @@ class _FeedScreenState extends State<FeedScreen> {
       appBar: AppBar(
         title: Text('Feed Screen'),
       ),
+      body: Container(
+        color: Colors.yellowAccent,
+      ),
     );
   }
 }

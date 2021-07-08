@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
 import 'account_screen.dart';
 import 'cart_screen.dart';
 import 'feed_dart.dart';
@@ -14,6 +15,9 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  int currentPage = 0;
+  LiquidController? _liquidController;
+
   int selectedIndex = 0;
   final screen = [
     HomeScreen(),
@@ -22,6 +26,14 @@ class _LandingPageState extends State<LandingPage> {
     CartScreen(),
     AccountScreen()
   ];
+
+  @override
+  void initState() {
+    _liquidController = LiquidController();
+    // TODO: implement initState
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +51,39 @@ class _LandingPageState extends State<LandingPage> {
         onTap: (index) {
           setState(() {
             selectedIndex = index;
+            _liquidController!.animateToPage(page: index, duration: 600);
+
+            print('nab click: ${_liquidController!.currentPage}');
           });
         },
 
         animationCurve: Curves
             .easeInBack, //! this animationCurve is the atyle of navigation bar
       ),
-      body: screen[selectedIndex],
+      ////body: screen[selectedIndex], //? this is only for view CarvedNavigationBar
+      body: Builder(
+        //! liquid Swiper
+        builder: (context) => LiquidSwipe(
+          liquidController: _liquidController,
+          pages: screen,
+          initialPage: selectedIndex,
+          waveType: WaveType.liquidReveal, //? tow types circulatr and liquid
+          onPageChangeCallback: (page) => pageChangeCallback(page),
+          // currentUpdateTypeCallback: (updateType) =>
+          //     updateTypeCallback(updateType),
+        ),
+      ),
     );
+  }
+
+  pageChangeCallback(int page) {
+    print('swiple click: ${page}');
+    setState(() {
+      selectedIndex = page;
+    });
+  }
+
+  updateTypeCallback(UpdateType updateType) {
+    print(updateType);
   }
 }

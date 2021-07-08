@@ -14,6 +14,9 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         title: Text('Cart Screen'),
       ),
+      body: Container(
+        color: Colors.redAccent,
+      ),
     );
   }
 }

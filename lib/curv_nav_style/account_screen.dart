@@ -14,6 +14,9 @@ class _AccountScreenState extends State<AccountScreen> {
       appBar: AppBar(
         title: Text('Account Screen'),
       ),
+      body: Container(
+        color: Colors.greenAccent,
+      ),
     );
     ;
   }
